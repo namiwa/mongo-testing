@@ -43,7 +43,8 @@ fn main() {
         .build()
         .unwrap()
         .block_on(async {
-            run_db_mock(args).await;
+            let res = run_db_mock(args).await;
+            res.unwrap_or_default()
         });
 }
 
