@@ -1,7 +1,7 @@
 use clap::Parser;
 use mongodb::{Client, options::{ClientOptions, EstimatedDocumentCountOptions} };
 use std::error::Error;
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize, __private::doc};
 use tokio;
 
 // safe ignore error since it compiles normally (proc-macro not expanded)
@@ -32,7 +32,6 @@ async fn run_db_mock(args: Args) -> Result<(), Box<dyn Error>> {
    let col = db.collection::<TestDocument>(&target_collection);
    let count = col.estimated_document_count(EstimatedDocumentCountOptions::default()).await?;
    println!("estimated number of documents {}", count);
-   // TODO: 1. check current test db cols 
    Ok(())
 }
 
